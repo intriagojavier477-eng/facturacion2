@@ -1,45 +1,23 @@
-<!DOCTYPE html>
-<html lang="es">
+<?= $this->extend('layouts/main') ?>
 
-<!-- Cargar Head -->
-<?= $this->include('layouts/components/head') ?>
+<!-- Título de la pestaña -->
+<?= $this->section('title') ?>
+Listado de Facturas
+<?= $this->endSection() ?>
 
-<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
-    <div class="app-wrapper">
+<!-- Título principal dentro del contenido -->
+<?= $this->section('page_title') ?>
+Gestión de Facturas
+<?= $this->endSection() ?>
 
-        <!-- Cargar Navbar -->
-        <?= $this->include('layouts/components/navbar') ?>
-
-        <!-- Cargar Sidebar -->
-        <?= $this->include('layouts/components/sidebar') ?>
-
-        <!-- Main Content Wrapper -->
-        <main class="app-main">
-            <!-- Header de la página (Título y Breadcrumb) -->
-            <div class="app-content-header">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h3 class="mb-0"><?= $this->renderSection('page_title') ?></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contenido dinámico de cada vista -->
-            <div class="app-content">
-                <div class="container-fluid">
-                    <?= $this->renderSection('content') ?>
-                </div>
-            </div>
-        </main>
-
-        <!-- Cargar Footer -->
-        <?= $this->include('layouts/components/footer') ?>
-
+<!-- Contenido Principal -->
+<?= $this->section('content') ?>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Facturas Registradas</h3>
     </div>
-
-    <!-- Cargar Scripts -->
-    <?= $this->include('layouts/components/scripts') ?>
-</body>
-</html>
+    <div class="card-body">
+        <p>Aquí irá la tabla o el formulario de tu módulo de facturación.</p>
+    </div>
+</div>
+<?= $this->endSection() ?>

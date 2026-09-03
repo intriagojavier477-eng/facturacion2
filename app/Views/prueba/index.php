@@ -6,8 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>FACTURACION</h1>
-    <b>Cliente:</b> <?= $nombre?><br/>
-    <b>direccion:</b> <?= $direccion ?>
+    <h1>Facturación</h1>
+    <b>Cliente:</b> <?=$nombre ?><br/>
+    <b>Direccion:</b> <?=$direccion ?>
 </body>
 </html>

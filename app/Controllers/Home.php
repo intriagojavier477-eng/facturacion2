@@ -4,12 +4,8 @@ namespace App\Controllers;
 
 class Home extends BaseController
 {
-
     public function index(): string
-    {
-        return view ('facturacion/index');
-        
-    }
-
- 
+    {        
+        return view('facturacion/index');
+    }    
 }
