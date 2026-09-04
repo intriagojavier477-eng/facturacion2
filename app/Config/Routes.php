@@ -24,4 +24,15 @@ $routes->group('categorias', ['filter' => ['auth', 'ajax']], function($routes) {
     $routes->post('guardar', 'CategoriasController::guardar');
     $routes->get('obtener/(:num)', 'CategoriasController::obtener/$1');
     $routes->delete('eliminar/(:num)', 'CategoriasController::eliminar/$1');
+
+    // Ruta Protegida que devuelve la Vista HTML (Agrega esto dentro de tu grupo ['filter' => 'auth'])
+$routes->get('marcas', 'MarcasController::index');
+
+// Rutas de la API / Endpoints (Agrega este nuevo grupo al final del archivo)
+$routes->group('marcas', ['filter' => ['auth', 'ajax']], function($routes) {
+    $routes->get('getMarcas', 'MarcasController::getMarcas');
+    $routes->post('guardar', 'MarcasController::guardar');
+    $routes->get('obtener/(:num)', 'MarcasController::obtener/$1');
+    $routes->delete('eliminar/(:num)', 'MarcasController::eliminar/$1');
+});
 });

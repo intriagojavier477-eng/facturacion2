@@ -43,10 +43,27 @@
                     </ul>
                 </li>
 
+                <!-- Opción Simple: Clientes -->
+                <li class="nav-item">
+                    <a href="<?= base_url('clientes') ?>" class="nav-link <?= url_is('clientes*') ? 'active' : '' ?>">
+                        <i class="nav-icon bi bi-people"></i>
+                        <p>Clientes</p>
+                    </a>
+                </li>
+
+                <!-- Opción Simple: Categorías -->
                 <li class="nav-item">
                     <a href="<?= base_url('categorias') ?>" class="nav-link <?= url_is('categorias*') ? 'active' : '' ?>">
                         <i class="nav-icon bi bi-tags"></i>
                         <p>Categorías</p>
+                    </a>
+                </li>
+
+                <!-- Opción Simple: Marcas -->
+                <li class="nav-item">
+                    <a href="<?= base_url('marcas') ?>" class="nav-link <?= url_is('marcas*') ? 'active' : '' ?>">
+                        <i class="nav-icon bi bi-award"></i>
+                        <p>Marcas</p>
                     </a>
                 </li>
 
