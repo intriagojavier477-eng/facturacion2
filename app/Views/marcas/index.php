@@ -2,6 +2,9 @@
 <?= $this->section('title') ?>Marcas<?= $this->endSection() ?>
 <?= $this->section('page_title') ?>Administración de Marcas<?= $this->endSection() ?>
 
+<?= $this->section('styles') ?>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
@@ -27,7 +30,7 @@
 </div>
 
 <!-- Modal Registrar / Editar -->
-<div class="modal fade" id="modalMarca" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+<div class="modal fade" id="modalMarca" tabindex="-1" aria-labelledby="modalTitle">
     <div class="modal-dialog">
         <div class="modal-content">
             <form id="formMarca" autocomplete="off">
@@ -39,7 +42,7 @@
                     <input type="hidden" id="id_marca" name="id_marca">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej. Sony, Samsung">
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej. Nike, Samsung, Nestle">
                         <div class="invalid-feedback" id="error-nombre"></div>
                     </div>
                 </div>
@@ -60,6 +63,7 @@
     const modalBS = new bootstrap.Modal(modalElement);
 
     $(document).ready(function() {
+        // Al terminar de abrirse el modal, enfocar el campo de texto
         $('#modalMarca').on('shown.bs.modal', function() {
             $('#nombre').trigger('focus');
         });
@@ -67,12 +71,11 @@
         tablaMarcas = $('#tablaMarcas').DataTable({
             "ajax": "<?= base_url('marcas/getMarcas') ?>",
             "columns": [
-                { "data": "id_marca", "className": "text-center" },
+                { "data": "id_marca" },
                 { "data": "nombre" },
                 {
                     "data": null,
                     "orderable": false,
-                    "className": "text-center",
                     "render": function(data, type, row) {
                         return `
                             <button class="btn btn-warning btn-sm me-1" onclick="editarMarca(${row.id_marca})" title="Editar">
@@ -93,7 +96,7 @@
         $('#formMarca').on('submit', function(e) {
             e.preventDefault();
             limpiarErrores();
-            
+
             $.ajax({
                 url: "<?= base_url('marcas/guardar') ?>",
                 type: "POST",
@@ -136,7 +139,10 @@
                 $('#modalTitle').text('Editar Marca');
                 modalBS.show();
             } else {
-                Toast.fire({ icon: 'error', title: response.message });
+                Toast.fire({
+                    icon: 'error',
+                    title: response.message
+                });
             }
         });
     }
@@ -160,9 +166,15 @@
                     success: function(response) {
                         if (response.status === 'success') {
                             tablaMarcas.ajax.reload();
-                            Toast.fire({ icon: 'success', title: response.message });
+                            Toast.fire({
+                                icon: 'success',
+                                title: response.message
+                            });
                         } else {
-                            Swal.fire('Error', response.message, 'error');
+                            Toast.fire({
+                                icon: 'error',
+                                title: response.message
+                            });
                         }
                     }
                 });

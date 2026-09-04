@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use CodeIgniter\Model;
@@ -10,7 +9,6 @@ class MarcaModel extends Model
     protected $primaryKey       = 'id_marca';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    
     protected $allowedFields    = ['nombre'];
 
     // Reglas centralizadas en el Modelo
@@ -23,7 +21,7 @@ class MarcaModel extends Model
             'required'   => 'El nombre de la marca es obligatorio.',
             'min_length' => 'El nombre debe tener al menos 2 caracteres.',
             'max_length' => 'El nombre no puede exceder los 50 caracteres.',
-            'is_unique'  => 'Esta marca ya se encuentra registrada.'
+            'is_unique'  => 'Esta marca ya existe.',
         ],
     ];
 }

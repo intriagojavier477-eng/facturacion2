@@ -35,9 +35,9 @@ class Filters extends BaseFilters
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
         'auth'          => \App\Filters\AuthFilter::class, // <-- Añadir esta línea
-        'ajax'          => \App\Filters\AjaxFilter::class, // <-- Añadir esta línea
+        'ajax'          => \App\Filters\AjaxFilter::class, 
     ];
-    
+
     /**
      * List of special required filters.
      *

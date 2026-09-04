@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controllers;
 
 use App\Models\MarcaModel;
@@ -23,6 +22,7 @@ class MarcasController extends BaseController
         if (!$this->request->isAJAX()) {
             return $this->response->setStatusCode(404);
         }
+
         $marcas = $this->marcaModel->findAll();
         return $this->response->setJSON(['data' => $marcas]);
     }
@@ -35,13 +35,13 @@ class MarcasController extends BaseController
 
         $id     = $this->request->getPost('id_marca');
         $nombre = trim((string) $this->request->getPost('nombre'));
-        
+
         $data = [
             'nombre' => $nombre
         ];
 
         if (!empty($id)) {
-            // Actualización
+            // En edición usas update(). Pasa el ID explícitamente para que {id_marca} se reemplace
             if (!$this->marcaModel->update($id, $data)) {
                 return $this->response->setJSON([
                     'status' => 'error',
@@ -50,7 +50,7 @@ class MarcasController extends BaseController
             }
             $message = 'Marca actualizada correctamente.';
         } else {
-            // Inserción
+            // En inserción usas insert()
             if (!$this->marcaModel->insert($data)) {
                 return $this->response->setJSON([
                     'status' => 'error',
@@ -91,6 +91,7 @@ class MarcasController extends BaseController
                 'message' => 'No se puede eliminar la marca porque tiene productos asociados.'
             ]);
         }
+
         return $this->response->setJSON(['status' => 'error', 'message' => 'Ocurrió un error al intentar eliminar.']);
     }
 }
