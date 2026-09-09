@@ -189,4 +189,25 @@ class FacturacionController extends BaseController
             'detalles' => $detalles
         ]);
     }
+    public function imprimir($id)
+    {
+        $venta = $this->ventaModel->select('venta.*, cliente.nombre AS cliente_nombre, cliente.identificacion AS cliente_identificacion, cliente.direccion, cliente.telefono, cliente.correo, usuario.nombre AS usuario_nombre')
+                                  ->join('cliente', 'cliente.id_cliente = venta.id_cliente')
+                                  ->join('usuario', 'usuario.id_usuario = venta.id_usuario')
+                                  ->where('venta.id_venta', $id)
+                                  ->first();
+
+        if (!$venta) {
+            return redirect()->to(base_url('facturacion'))->with('error', 'Factura no encontrada.');
+        }
+
+        $detalles = $this->detalleVentaModel->getDetallesPorVenta($id);
+
+        $data = [
+            'venta'    => $venta,
+            'detalles' => $detalles
+        ];
+
+        return view('facturacion/factura_pdf', $data);
+    }
 }
